@@ -4,6 +4,9 @@ onready var player = $"../Player"
 onready var anim = $AnimationPlayer
 onready var coll_shape = $CollisionShape2D
 
+const MAX_SPEED = 120
+const MIN_SPEED = 60
+
 enum {
 	CARRY,
 	THROW,
@@ -12,6 +15,10 @@ enum {
 var state = CARRY
 var mouse_position
 var direction = Vector2.ZERO
+var throw_speed
+var min_speed
+var max_speed 
+var friction = 1
 
 
 func _physics_process(delta):
@@ -22,8 +29,13 @@ func _physics_process(delta):
 		
 		THROW:
 			var distance = position.distance_to(mouse_position)
-			move_and_slide(direction * 50)
-			if distance < 5 or is_on_wall():
+			move_and_slide(direction * throw_speed)
+			throw_speed = clamp(throw_speed - friction, min_speed, max_speed)
+			
+			if distance < 5:
+				min_speed = 0
+				friction = 5
+			if throw_speed == 0 or is_on_wall():
 				state = ON_FLOOR
 		
 		ON_FLOOR:
@@ -34,5 +46,9 @@ func _input(event):
 		mouse_position = get_global_mouse_position()
 		var egg_position = self.global_position
 		direction = egg_position.direction_to(mouse_position) 
-		state = THROW
 		anim.play("still")
+		throw_speed = MAX_SPEED
+		max_speed = MAX_SPEED
+		min_speed = MIN_SPEED
+		state = THROW
+		friction = 1
