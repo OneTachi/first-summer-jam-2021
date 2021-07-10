@@ -23,6 +23,7 @@ tracks/0/keys = {
 }
 
 [node name="Player" type="KinematicBody2D"]
+collision_layer = 2
 script = ExtResource( 2 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -36,13 +37,14 @@ drag_margin_bottom = 0.5
 editor_draw_drag_margin = true
 
 [node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, -2 )
 scale = Vector2( 0.75, 0.75 )
 texture = ExtResource( 1 )
-centered = false
 hframes = 5
+frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 6, 8 )
+visible = false
 shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
