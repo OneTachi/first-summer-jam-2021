@@ -21,19 +21,25 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 0, 1, 0 ]
 }
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"values": [  ]
+}
 
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 2
 script = ExtResource( 2 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
-offset = Vector2( 4, 4 )
 current = true
 zoom = Vector2( 0.15, 0.15 )
-drag_margin_left = 0.5
-drag_margin_top = 0.5
-drag_margin_right = 0.5
-drag_margin_bottom = 0.5
 editor_draw_drag_margin = true
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -41,7 +47,6 @@ position = Vector2( 0, -2 )
 scale = Vector2( 0.75, 0.75 )
 texture = ExtResource( 1 )
 hframes = 5
-frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
